@@ -4,6 +4,8 @@ Set kubectl contexts/namespaces per shell/terminal to manage multi Kubernetes cl
 
 i.e. same as `kubectx/kubens` but per shell/terminal.
 
+This is a fork of https://github.com/aabouzaid/kubech, i modified it a little bit so that it can work on both Linux and MacOS.
+
 <!-- omit in toc -->
 ## ToC
 - [Why](#why)
@@ -39,21 +41,22 @@ i.e. same as `kubectx/kubens` but per shell/terminal.
 
 ## Install
 Clone this repo, then source `kubech` in your shell config file.
-```bash
-git clone https://github.com/aabouzaid/kubech ~/.kubech
+```bash or zsh
+git clone https://github.com/salutgeek/kubech.git ~/.config/.kubech
 ```
 
 ### Bash
 ```
-echo 'source ~/.kubech/kubech' >> ~/.bashrc
-echo 'source ~/.kubech/completion/kubech.bash' >> ~/.bashrc
+echo 'source ~/.config/.kubech/kubech' >> ~/.bashrc
+echo 'source ~/.config/.kubech/completion/kubech.bash' >> ~/.bashrc
 ```
 ### Zsh
 Completion for `zsh` with `oh-my-zsh` enabled.
 ```
-echo 'source ~/.kubech/kubech' >> ~/.zshrc
-ln -s ~/.kubech/completion/kubechn.zsh ~/.oh-my-zsh/completions/_kubechn.zsh
-ln -s ~/.kubech/completion/kubechc.zsh ~/.oh-my-zsh/completions/_kubechc.zsh
+ZPLUGINDIR=${ZPLUGINDIR:-${ZDOTDIR:-$HOME/.config/zsh}/plugins};
+echo 'source ~/.config/.kubech/kubech' >> ~/.zshrc;
+ln -s ~/.config/.kubech/completion/kubechn.zsh ${ZPLUGINDIR}/zsh-completions/src/_kubechn.zsh;
+ln -s ~/.config/.kubech/completion/kubechc.zsh ${ZPLUGINDIR}/zsh-completions/src/_kubechc.zsh;
 ```
 
 Please make sure `autoload -U compinit && compinit` is added to `~/.zshrc` if not please execute below command.

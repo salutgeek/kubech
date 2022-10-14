@@ -54,7 +54,17 @@ chmod 744 "${KUBECONFIG_SRC_DIR}" "${KUBECONFIG_DEST_DIR}"
 # Handeling Kube config files.
 _kubeconfig_files () {
     if [ -d "${KUBECONFIG_SRC_DIR}" ]; then
-        KUBECONFIG_FILES="$(find "${KUBECONFIG_SRC_DIR}" -type f -printf '%p:')"
+        case "$(uname -s)" in
+            Linux*)
+                KUBECONFIG_FILES="$(find "${KUBECONFIG_SRC_DIR}" -type f -printf '%p:')"
+                ;;
+            Darwin*)
+                KUBECONFIG_FILES="$(find "${KUBECONFIG_SRC_DIR}" -type f -print0 | xargs -0 stat -f '%N')"
+                ;;
+            *)
+                echo "UNKNOWN OS:$(uname -s)"
+                exit 1
+        esac
     fi
     echo "${KUBECONFIG_FILES}${KUBECONFIG_ORIG}"
 }
