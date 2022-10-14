@@ -42,7 +42,7 @@ This is a fork of https://github.com/aabouzaid/kubech, i modified it a little bi
 ## Install
 Clone this repo, then source `kubech` in your shell config file.
 ```bash or zsh
-git clone https://github.com/salutgeek/kubech.git ~/.config/.kubech
+git clone git@github.com:salutgeek/kubech.git ~/.config/.kubech
 ```
 
 ### Bash
