@@ -124,7 +124,7 @@ kubechc () {
     fi
 }
 
-alias kchc='kubechc'
+alias kctx='kubechc'
 
 
 #
@@ -147,7 +147,7 @@ kubechn () {
     fi
 }
 
-alias kchn='kubechn'
+alias kns='kubechn'
 
 
 #
