@@ -94,13 +94,16 @@ _kube_config () {
 # Generate kubectl config for a single context.
 _kubechg () {
     kube_context="${1}"
-    if [[ ${kube_context} =~ "/" || ${kube_context} =~ ":" ]]; then
-        kube_context=${kube_context//\//@}
-        kube_context=${kube_context//:/_}
+    kube_namespace="${2:-default}"
+
+    # create tmp variable to sanitize kube_context's name if it contains / or :
+    kube_context_tmp=${kube_context}
+    if [[ ${kube_context_tmp} =~ "/" || ${kube_context_tmp} =~ ":" ]]; then
+        kube_context_tmp=${kube_context_tmp//\//@}
+        kube_context_tmp=${kube_context_tmp//:/_}
     fi
 
-    kube_namespace="${2:-default}"
-    kubeconfig_file="${kube_context}-${kube_namespace}"
+    kubeconfig_file="${kube_context_tmp}-${kube_namespace}"
 
     touch "${KUBECONFIG_DEST_DIR}/${kubeconfig_file}"
     chmod 600 "${KUBECONFIG_DEST_DIR}/${kubeconfig_file}"
