@@ -94,6 +94,11 @@ _kube_config () {
 # Generate kubectl config for a single context.
 _kubechg () {
     kube_context="${1}"
+    if [[ ${kube_context} =~ "/" || ${kube_context} =~ ":" ]]; then
+        kube_context=${kube_context//\//@}
+        kube_context=${kube_context//:/_}
+    fi
+
     kube_namespace="${2:-default}"
     kubeconfig_file="${kube_context}-${kube_namespace}"
 
