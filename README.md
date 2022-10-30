@@ -6,26 +6,26 @@ i.e. same as `kubectx/kubens` but per shell/terminal.
 
 This is a fork of https://github.com/aabouzaid/kubech.
 
-## Acknowledgement
+<!-- omit in toc -->
+## Acknowledgement 
 This is a **fork** of the original kubech repo, i update the original repo to better suit my use-case, so i can't (and don't want to) take credit for the work that had been done by the [author of kubech](https://github.com/aabouzaid). 
 
 All the modifications have been done in a limit time, so i'm sure improvement can still be made. Any PRs or questions are welcome! ;) 
 
+<!-- omit in toc -->
 ## What is the difference between this fork and the original kubech repo?
 
 - Work on both Linux and MacOS (the original repo have some shell commands that are not compliance with BSD (MacOS))
 - Some bugs that can occur when kubecontext's name contains special characters like: colon `(:)` or slash `(/)`
 - Better consistency of output message when change kube context/namespace
 
+<!-- omit in toc -->
 ## Prerequisites
 - Have kubectl installed
 - Have KUBECONFIG predefined in your shell rc. (eg. `export KUBECONFIG=${PATH_TO_KUBECONFIG_1}:${PATH_TO_KUBECONFIG_2}...`) 
 
 <!-- omit in toc -->
 ## ToC
-- [Acknowledgement](#acknowledgement)
-- [What is the difference between this fork and the original kubech repo?](#what-is-the-difference-between-this-fork-and-the-original-kubech-repo)
-- [Prerequisites](#prerequisites)
 - [Why](#why)
 - [Features](#features)
 - [Install](#install)
