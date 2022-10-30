@@ -1,0 +1,1 @@
+_arguments "1: :(- $(kns))"

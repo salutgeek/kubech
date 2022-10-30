@@ -4,10 +4,28 @@ Set kubectl contexts/namespaces per shell/terminal to manage multi Kubernetes cl
 
 i.e. same as `kubectx/kubens` but per shell/terminal.
 
-This is a fork of https://github.com/aabouzaid/kubech, i modified it a little bit so that it can work on both Linux and MacOS.
+This is a fork of https://github.com/aabouzaid/kubech.
+
+## Acknowledgement
+This is a **fork** of the original kubech repo, i update the original repo to better suit my use-case, so i can't (and don't want to) take credit for the work that had been done by the [author of kubech](https://github.com/aabouzaid). 
+
+All the modifications have been done in a limit time, so i'm sure improvement can still be made. Any PRs or questions are welcome! ;) 
+
+## What is the difference between this fork and the original kubech repo?
+
+- Work on both Linux and MacOS (the original repo have some shell commands that are not compliance with BSD (MacOS))
+- Some bugs that can occur when kubecontext's name contains special characters like: colon `(:)` or slash `(/)`
+- Better consistency of output message when change kube context/namespace
+
+## Prerequisites
+- Have kubectl installed
+- Have KUBECONFIG predefined in your shell rc. (eg. `export KUBECONFIG=${PATH_TO_KUBECONFIG_1}:${PATH_TO_KUBECONFIG_2}...`) 
 
 <!-- omit in toc -->
 ## ToC
+- [Acknowledgement](#acknowledgement)
+- [What is the difference between this fork and the original kubech repo?](#what-is-the-difference-between-this-fork-and-the-original-kubech-repo)
+- [Prerequisites](#prerequisites)
 - [Why](#why)
 - [Features](#features)
 - [Install](#install)
@@ -55,8 +73,8 @@ Completion for `zsh` with `oh-my-zsh` enabled.
 ```
 ZPLUGINDIR=${ZPLUGINDIR:-${ZDOTDIR:-$HOME/.config/zsh}/plugins};
 echo 'source ~/.config/.kubech/kubech' >> ~/.zshrc;
-ln -s ~/.config/.kubech/completion/kubechn.zsh ${ZPLUGINDIR}/zsh-completions/src/_kubechn.zsh;
-ln -s ~/.config/.kubech/completion/kubechc.zsh ${ZPLUGINDIR}/zsh-completions/src/_kubechc.zsh;
+ln -s ~/.config/.kubech/completion/kctx.zsh ${ZPLUGINDIR}/zsh-completions/src/_kctx.zsh;
+ln -s ~/.config/.kubech/completion/kns.zsh ${ZPLUGINDIR}/zsh-completions/src/_kns.zsh;
 ```
 
 Please make sure `autoload -U compinit && compinit` is added to `~/.zshrc` if not please execute below command.
@@ -68,7 +86,7 @@ echo  'autoload -U compinit && compinit' >> ~/.zshrc
 ```
 NOTE:
   - The command "kubech" is just a meta for other commands. So kubech does nothing by itself.
-  - Also short names like "kchc/kchn/kchu" are available.
+  - Also short names like "kctx/kns/kundo" are available.
 
 VARS:
   KUBECONFIG_SRC_DIR  : Set directory with extra kubectl config files to read in kubech commands.
@@ -81,17 +99,17 @@ VARS:
                         Default: "$HOME/.kube/config.dest.d"
 
 USAGE:
-  kubechc             : List all contexts
-  kubechc <CONTEXT>   : Switch to context <CONTEXT>
-  kubechn             : List all namespaces
-  kubechn <NAMESPACE> : Switch to namespace <NAMESPACE>
-  kubechu             : Unset the active context. This is just a safty net
+  kctx                : List all contexts
+  kctx <CONTEXT>      : Switch to context <CONTEXT>
+  kns                 : List all namespaces
+  kns <NAMESPACE>     : Switch to namespace <NAMESPACE>
+  kundo               : Unset the active context. This is just a safty net
                         to avoid applying config by mistake to the wrong cluster.
 ```
 
 ### List available contexts
 ```
-$ kubechc
+$ kctx
 k8s_cluster01
 k8s_cluster02
 ```
@@ -99,12 +117,12 @@ k8s_cluster02
 ### Switch context
 No need to write the full name, press tab for auto complete.
 ```
-$ kubechc k8s_cluster01
+$ kctx k8s_cluster01
 ```
 
 ### List available namespaces
 ```
-$ kubechn
+$ kns
 default
 kube-public
 kube-system
@@ -114,15 +132,15 @@ monitoring
 ### Switch namespace
 No need to write the full name, press tab for auto complete.
 ```
-$ kubechn monitoring
+$ kns monitoring
 ```
 
 ## Notes
-- This tools has been tested with `bash 4.4` only. However it should work with other shells like `zsh`.
+- This tools has been tested with `zsh 5.8.1` only. However it should work with other shells like `bash`.
 - It's recommended to use this tool with [kube-ps1](https://github.com/jonmosco/kube-ps1)
   so current cluster is more visible.
 - It's still recommended to have [kubectx/kubens](https://github.com/ahmetb/kubectx)
   to manage contexts/namespaces globally.
 
 ## To-do
-- Test it with older `bash` versions like bash v3 on MacOS.
+- Test it with older `bash` versions like bash v3 on MacOS/Linux

@@ -1,15 +1,15 @@
 # Bash autocompletion for kubech commands.
 
-# Auto complete for "kubechc" command.
-_kubechc_completions() {
-    COMPREPLY=($(compgen -W "$(kubechc | tr '\n' ' ')" "${COMP_WORDS[1]}"))
+# Auto complete for "kctx" command.
+_kctx_completions() {
+    COMPREPLY=($(compgen -W "$(kctx | tr '\n' ' ')" "${COMP_WORDS[1]}"))
 }
 
-complete -F _kubechc_completions kubechc kchc
+complete -F _kctx_completions kctx
 
 # Auto complete for "kubechn" command.
-_kubechn_completions() {
-    COMPREPLY=($(compgen -W "$(kubechn | tr '\n' ' ')" "${COMP_WORDS[1]}"))
+_kns_completions() {
+    COMPREPLY=($(compgen -W "$(kns | tr '\n' ' ')" "${COMP_WORDS[1]}"))
 }
 
-complete -F _kubechn_completions kubechn kchn
+complete -F _kns_completions kns
